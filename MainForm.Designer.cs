@@ -314,6 +314,7 @@ namespace EulerianGraph
             this.Controls.Add(this.SettingBox);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.Check_button);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Сравнение эйлеровости графов";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -332,17 +333,11 @@ namespace EulerianGraph
         #endregion
 
         private System.Windows.Forms.Button Check_button;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button InputG1_button;
         private System.Windows.Forms.Button CleanG1_button;
         private System.Windows.Forms.Button InfoG1_button;
         private System.Windows.Forms.GroupBox SettingBox;
-        private System.Windows.Forms.RadioButton FromKeyboard_radioButton;
-        private System.Windows.Forms.RadioButton FromFile_radioButton;
         private System.Windows.Forms.Button SaveData_button;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button InfoG2_button;
-        private System.Windows.Forms.Button InputG2_button;
         private System.Windows.Forms.Button CleanG2_button;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.CheckBox graph2checkBox;
@@ -352,6 +347,12 @@ namespace EulerianGraph
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button GeneralInfo_button;
+        public System.Windows.Forms.RadioButton FromKeyboard_radioButton;
+        public System.Windows.Forms.RadioButton FromFile_radioButton;
+        public System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.Button InputG1_button;
+        public System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Button InputG2_button;
     }
 }
 

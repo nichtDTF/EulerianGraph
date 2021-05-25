@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+* @file Eurelian.cs
+* @author Чуев О.В., гр. 525-і
+* @date 13 мая 2021
+* @brief Два класса для работы с эйлеровым графом
+*
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -194,7 +202,7 @@ namespace EulerianGraph
 
                 int key = 0;
 
-                ///Определение оптимальной вершины, для поиска
+                //Определение оптимальной вершины, для поиска
                 for (int i = 0; i < NumberOfDots; i++)
                 {
                     int N = 0;
@@ -340,18 +348,22 @@ namespace EulerianGraph
             /// </summary>
             public void Visualize()
             {
+                //Считаем кол-во градусов 
                 int N = 360 / NumberOfDots;
                 double x = 0;
                 double y = 0;
 
+                //Определяем центр
                 int startX = G.centrX,
                     startY = G.centrY;
 
+                //Получаем координаты вершин
                 for (int i = 0; i < NumberOfDots; i++)
                 {
                     x = G.RTr * Math.Cos(((0 - N) * i) * Math.PI / 180);
                     y = G.RTr * Math.Sin(((0 - N) * i) * Math.PI / 180);
                          
+                    //Добавляем в массив вершин вершину с вычисленными координатами
                     Vertex v = new Vertex(startX + Convert.ToInt32(x), startY + Convert.ToInt32(y));
                     V.Add(v);
                 }
@@ -362,6 +374,7 @@ namespace EulerianGraph
                     for (int j = 0; j < NumberOfDots; j++)
                         tmp[i, j] = Matrix[i, j];                
 
+                //Проходим по матрице смежности, записываем в массив граней весь список существующих граней у графа
                 for (int i = 0; i < NumberOfDots; i++)
                     for (int j = 0; j < NumberOfDots; j++)
                         if (tmp[i, j] == 1)
@@ -372,6 +385,7 @@ namespace EulerianGraph
                             tmp[j, i] = 0;
                         }
                 
+                //Рисуем весь граф
                 G.DrawAllGraph(V,E);
             }
 
@@ -380,6 +394,7 @@ namespace EulerianGraph
             /// </summary>
             public void DrawWay()
             {
+                //Рисуем путь по массиву вершин
                 G.DrawWay(V, Way);
             }
 
@@ -402,7 +417,8 @@ namespace EulerianGraph
                         else 
                             return false;
                     }
-                    return false;
+                    else
+                        return false;
                 }
                 else
                 {
@@ -463,9 +479,9 @@ namespace EulerianGraph
                 string fileN = "";
                 string AllText = "";
 
-                List<string> tmp = new List<string>();
+                //List<string> tmp = new List<string>();
 
-                string[] ArrayWithData = new string[120];
+                string[] ArrayWithData = new string[500];
 
                 List<int> OutputArray = new List<int>();
                 try
@@ -483,8 +499,6 @@ namespace EulerianGraph
                     Name = fileN;
                     int[] a = new int[ArrayWithData.Length];
                     FO = OutputArray;
-                    //OutputArray.CopyTo(a, 0);
-                    //FO = a;
                     return true;
                 }
                 catch (Exception)
@@ -518,6 +532,28 @@ namespace EulerianGraph
                 this.x = x;
                 this.y = y;
             }
+
+            /// <summary>
+            /// Класс для вершин
+            /// </summary>
+            public class Vertex1
+            {
+                /// <summary>
+                /// Координаты вершины
+                /// </summary>
+                public int x, y;
+
+                /// <summary>
+                /// Конструктор для создания вершины
+                /// </summary>
+                /// <param name="x">Х координата</param>
+                /// <param name="y">У координата</param>
+                public Vertex1(int x, int y)
+                {
+                    this.x = x;
+                    this.y = y;
+                }
+            }
         }
 
         /// <summary>
@@ -533,8 +569,8 @@ namespace EulerianGraph
             /// <summary>
             /// Конструктор для создания ребра
             /// </summary>
-            /// <param name="v1"></param>
-            /// <param name="v2"></param>
+            /// <param name="v1">Номер вершины 1</param>
+            /// <param name="v2">Номер вершины 2</param>
             public Edge(int v1, int v2)
             {
                 this.v1 = v1;
@@ -681,14 +717,10 @@ namespace EulerianGraph
             /// </summary>
             public void DrawWay(List<Vertex> Ver, List<int> Way)
             {
-                //Создаем экземпляр списка граней для хранения всех граней  
-                List<Edge> edges = new List<Edge>();
-                
                 for (int i = 0; i < Way.Count - 1; i++)
                 {
-                    //Создаем экземпляр вершины, в которую заносим две рядом стоящие вершины из эйлерова пути
+                    //Создаем экземпляр ребра, в которую заносим две рядом стоящие вершины из эйлерова пути
                     Edge e = new Edge(Way[i], Way[i + 1]);
-                    edges.Add(e);
                     
                     //Рисуем нашу грань между двумя вершинами
                     DrawEdge(Ver[Way[i]-1], Ver[Way[i+1]-1], e, redPen);
@@ -735,6 +767,7 @@ namespace EulerianGraph
             /// <param name="E"></param>
             public void DrawAllGraph(List<Vertex> V, List<Edge> E)
             {
+                //Очищаем
                 gr.Clear(Color.Transparent);
                 //рисуем ребра
                 for (int i = 0; i < E.Count; i++)
@@ -742,12 +775,10 @@ namespace EulerianGraph
                     if (E[i].v1 == E[i].v2)
                     {
                         gr.DrawArc(greenPen, (V[E[i].v1].x - 2 * R), (V[E[i].v1].y - 2 * R), 2 * R, 2 * R, 90, 270);
-                        //point = new PointF(V[E[i].v1].x - (int)(2.75 * R), V[E[i].v1].y - (int)(2.75 * R));
                     }
                     else
                     {
                         gr.DrawLine(greenPen, V[E[i].v1].x, V[E[i].v1].y, V[E[i].v2].x, V[E[i].v2].y);
-                        //point = new PointF((V[E[i].v1].x + V[E[i].v2].x) / 2, (V[E[i].v1].y + V[E[i].v2].y) / 2);
                     }
                 }
 

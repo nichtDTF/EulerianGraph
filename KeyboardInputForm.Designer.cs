@@ -29,6 +29,7 @@ namespace EulerianGraph
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KeyboardInputForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Check_button = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -108,6 +109,7 @@ namespace EulerianGraph
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(676, 178);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "KeyboardInputForm";
             this.Text = "Введите информацию с клавиатуры";
             this.groupBox1.ResumeLayout(false);

@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+* @file KeyboardInputForm.cs
+* @author Чуев О.В., гр. 525-і
+* @date 13 мая 2021
+* @brief Форма для ввода с клавиатуры
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;

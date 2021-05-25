@@ -64,6 +64,7 @@ namespace EulerianGraph
             this.ClientSize = new System.Drawing.Size(1430, 676);
             this.Controls.Add(this.Next_button);
             this.Controls.Add(this.pictureBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GeneralInfoForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

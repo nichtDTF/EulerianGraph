@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+* @file MainForm.cs
+* @author Чуев О.В., гр. 525-і
+* @date 13 мая 2021
+* @brief Главная форма
+*/
+
+using System;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 
@@ -7,9 +14,9 @@ namespace EulerianGraph
     public partial class MainForm : Form
     {
         //Экземпляр графа 1
-        EulerianGraph.Eurelian.Graph graph1;
+        public EulerianGraph.Eurelian.Graph graph1;
         //Экземпляр графа 2
-        EulerianGraph.Eurelian.Graph graph2;
+        public EulerianGraph.Eurelian.Graph graph2;
 
         /// <summary>
         /// Форма с общей инструкцией 
@@ -37,9 +44,11 @@ namespace EulerianGraph
         }
 
         /// <summary>
-        /// 
+        /// Метод для загрузки информации в граф
         /// </summary>
-        /// <param name="graph"></param>
+        /// <param name="graph">граф</param>
+        /// <param name="picture">место, на котором происходит визуализация</param>
+        /// <param name="name">имя графа</param>
         private void Input(EulerianGraph.Eurelian.Graph graph, PictureBox picture, string name)
         {
             picture.Hide();
@@ -78,6 +87,7 @@ namespace EulerianGraph
                 form.ShowDialog();
                 try
                 {
+                    //Конвертация ФО в матрицу смежности
                     graph.ConvertFOtoMatrix();
                     //Проверка графа на эйлеровость
                     graph.EulerianOrNot();
@@ -104,208 +114,30 @@ namespace EulerianGraph
         }
 
         /// <summary>
-        /// Кнопка для загрузки информации в экземпляр класса Граф1
+        /// Метод для выводы инфорации о графе
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InputG1_button_Click(object sender, EventArgs e)
-        {
-            Input(graph1, pictureBox1, " для графа 1");
-
-            //pictureBox1.Hide();
-            //graph1.ClearAllData();
-            ////Если нажата радиокнопка "ввести из файла"
-            //if (FromFile_radioButton.Checked)
-            //{
-            //    //Если загрузка из файла прошла успешно и файл оказался FO массивом, выполнять все последующие операции
-            //    if (graph1.ReadFromFile())
-            //    {
-            //        //Проверка графа на эйлеровость
-            //        graph1.EulerianOrNot();
-            //        //Отображение picterbox
-            //        pictureBox1.Show();
-            //        //Очистка полотна
-            //        graph1.G.clearSheet();
-            //        //Визуализиация графа 
-            //        graph1.Visualize();
-            //        //Если граф эйлеров, отображение пути
-            //        if (graph1.IsEulerian)
-            //        {
-            //            //Очистка полотна
-            //            graph1.G.clearSheet();
-            //            //Рисование пути
-            //            graph1.DrawWay();
-            //        }
-            //    }
-            //}
-            ////Если нажата радиокнопка "ввести вручную"
-            //else
-            //{
-            //    //Создать форму для ввода с клавиатуры
-            //    KeyboardInputForm form = new KeyboardInputForm(graph1);
-            //    form.groupBox1.Text += " для графа 1";
-            //    //Вывести форму для ввода с клавиатуры в модальном режиме
-            //    form.ShowDialog();
-            //    try
-            //    {
-            //        graph1.ConvertFOtoMatrix();
-            //        //Проверка графа на эйлеровость
-            //        graph1.EulerianOrNot();
-            //        //Отображение picterbox
-            //        pictureBox1.Show();
-            //        //Очистка полотна
-            //        graph1.G.clearSheet();
-            //        //Визуализиация графа 
-            //        graph1.Visualize();
-            //        //Если граф эйлеров, отображение пути
-            //        if (graph1.IsEulerian)
-            //        {
-            //            //Очистка полотна
-            //            graph1.G.clearSheet();
-            //            //Рисование пути
-            //            graph1.DrawWay();
-            //        }
-            //    }
-            //    catch (Exception)
-            //    {
-            //        MessageBox.Show("Данные не введены или введены неверно", "Ошибка");
-            //    }
-            //}          
-        }
-
-        /// <summary>
-        /// Кнопка для загрузки информации в экземпляр класса Граф2
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InputG2_button_Click(object sender, EventArgs e)
-        {
-            pictureBox2.Hide();
-            graph2.ClearAllData();
-            //Если нажата радиокнопка "ввести из файла"
-            if (FromFile_radioButton.Checked)
-            {
-                //Если загрузка из файла прошла успешно и файл оказался FO массивом, выполнять все последующие операции
-                if (graph2.ReadFromFile())
-                {
-                    //Проверка графа на эйлеровость
-                    graph2.EulerianOrNot();
-                    //Отображение picterbox
-                    pictureBox2.Show();
-                    //Очистка полотна
-                    graph2.G.clearSheet();
-                    //Визуализиация графа 
-                    graph2.Visualize();
-                    //Если граф эйлеров, отображение пути
-                    if (graph2.IsEulerian)
-                    {
-                        //Очистка полотна
-                        graph2.G.clearSheet();
-                        //Рисование пути
-                        graph2.DrawWay();
-                    }
-                }
-            }
-            //Если нажата радиокнопка "ввести вручную"
-            else
-            {
-                //Создать форму для ввода с клавиатуры
-                KeyboardInputForm form = new KeyboardInputForm(graph2);
-                form.groupBox1.Text += " для графа 2";
-                //Вывести форму для ввода с клавиатуры в модальном режиме
-                form.ShowDialog();
-                try
-                {
-                    graph2.ConvertFOtoMatrix();
-                    //Проверка графа на эйлеровость
-                    graph2.EulerianOrNot();
-                    //Отображение picterbox
-                    pictureBox2.Show();
-                    //Очистка полотна
-                    graph2.G.clearSheet();
-                    //Визуализиация графа 
-                    graph2.Visualize();
-                    //Если граф эйлеров, отображение пути
-                    if (graph2.IsEulerian)
-                    {
-                        //Очистка полотна
-                        graph2.G.clearSheet();
-                        //Рисование пути
-                        graph2.DrawWay();
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Данные не введены или введены неверно", "Ошибка");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Кнопка для вывода информации о Граф1
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InfoG1_button_Click(object sender, EventArgs e)
+        /// <param name="graph">граф</param>
+        /// <param name="name">его имя</param>
+        private void Info(EulerianGraph.Eurelian.Graph graph, string name)
         {
             InformationForm form = new InformationForm();
             form.Show();
-            form.Text += " о Графе 1";
-            if (graph1.Name == null)
-                form.NameTextBox.Text = "Данные введены вручную";
+            form.Text += name;
+            if (graph.Name == null)
+                form.NameTextBox.Text = "Данные введены вручную или не введены";
             else
-                form.NameTextBox.Text = graph1.Name;
+                form.NameTextBox.Text = graph.Name;
 
             form.NumDTextBox.Text = Convert.ToString(graph1.NumberOfDots);
             form.NumLTextBox.Text = Convert.ToString(graph1.NumberOfLine);
             form.EureTextBox.Text = Convert.ToString(graph1.IsEulerian);
 
-            if (graph1.IsEulerian)
+            if (graph.IsEulerian)
             {
                 form.WayLabel.Visible = true;
                 form.WayTextBox.Visible = true;
                 string str = "";
-                foreach (var item in graph1.Way)
-                {
-                    str += Convert.ToString(item)  + " ";
-                }
-                form.WayTextBox.Text = str;
-            }
-            else
-            {
-                form.WayLabel.Visible = false;
-                form.WayTextBox.Visible = false;
-                form.WayTextBox.Text = "";
-            }
-        }
-
-        /// <summary>
-        /// Кнопка для вывода информации о Граф2
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InfoG2_button_Click(object sender, EventArgs e)
-        {
-            InformationForm form = new InformationForm();
-            form.Show();
-            form.Text += " о Графе 2";
-            if (graph2.Name == null)
-            {
-                form.NameTextBox.Text = "Данные введены вручную";
-            }
-            else
-                form.NameTextBox.Text = graph2.Name;
-
-            form.NumDTextBox.Text = Convert.ToString(graph2.NumberOfDots);
-            form.NumLTextBox.Text = Convert.ToString(graph2.NumberOfLine);
-            form.EureTextBox.Text = Convert.ToString(graph2.IsEulerian);
-
-            if (graph2.IsEulerian)
-            {
-                form.WayLabel.Visible = true;
-                form.WayTextBox.Visible = true;
-                string str = "";
-                foreach (var item in graph2.Way)
+                foreach (var item in graph.Way)
                 {
                     str += Convert.ToString(item) + " ";
                 }
@@ -317,6 +149,46 @@ namespace EulerianGraph
                 form.WayTextBox.Visible = false;
                 form.WayTextBox.Text = "";
             }
+        }
+
+        /// <summary>
+        /// Кнопка для загрузки информации в экземпляр класса Граф1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InputG1_button_Click(object sender, EventArgs e)
+        {
+            Input(graph1, pictureBox1, " для графа 1");         
+        }
+
+        /// <summary>
+        /// Кнопка для загрузки информации в экземпляр класса Граф2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InputG2_button_Click(object sender, EventArgs e)
+        {
+            Input(graph2, pictureBox2, " для графа 2");
+        }
+
+        /// <summary>
+        /// Кнопка для вывода информации о Граф1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InfoG1_button_Click(object sender, EventArgs e)
+        {
+            Info(graph1, " о Графе 1");
+        }
+
+        /// <summary>
+        /// Кнопка для вывода информации о Граф2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InfoG2_button_Click(object sender, EventArgs e)
+        {
+            Info(graph2, " о Графе 2");
         }
 
         /// <summary>
